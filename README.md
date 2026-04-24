@@ -1,13 +1,20 @@
-# Project Title
+# Todo List App
 
-Brief one-line description of what the project does.
+A simple and modular todo list application that allows users to organize tasks into projects and manage their daily workflow.
 Built as part of [The Odin Project](https://www.theodinproject.com).
 
-Live Demo: [Link](#)
+**Live Demo:** [Coming Soon]
+
+---
 
 ## Overview
 
-2-3 sentences describing the project, its purpose, and the design approach.
+This project is a dynamic todo list application focused on clean architecture and scalability. Users can create projects, add todos with details such as due dates and priorities, and manage them through an interactive interface.
+
+The application emphasizes separation of concerns by dividing logic, DOM manipulation, and data persistence into independent modules. It also uses localStorage to maintain user data between sessions.
+
+---
+
 
 ## Features
 
