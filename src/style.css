@@ -1,0 +1,113 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --black: #770a0a;
+    --bg: #addfa8;
+    --accent:#59bad0;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 3px solid var(--black);
+    background: var(--accent);
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+
+nav {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.nav-btn {
+    background: none;
+    border: 2px solid var(--black);
+    padding: 0.4rem 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+.nav-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+.nav-btn.active {
+    background: var(--black);
+    color: var(--accent);
+}
+
+#content {
+    flex: 1;
+    animation: fadeUp 0.25s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    max-width: 480px;
+    line-height: 1.6;
+}
+
+.btn {
+    background: var(--accent);
+    border: 2px solid var(--black);
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.btn:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 var(--black);
+}
