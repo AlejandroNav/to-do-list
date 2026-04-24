@@ -1,8 +1,19 @@
 import './style.css';
-import CreateTodo from './modules/Todo.js'
+import createTodo from './modules/Todo.js'
 
-const todo1 = CreateTodo("Buy groceries", "Milk, eggs, bread")
+const todo1 = createTodo({
+  title: "Buy milk",
+  description: "From the store",
+  dueDate: "2024-01-01",
+  priority: "high"
+})
 console.log(todo1)
+
+const todo2 = createTodo({
+  title: "Buy car",
+
+})
+console.log(todo2)
 
 const tabs = document.querySelectorAll('.nav-btn');
 const content = document.getElementById('content');
