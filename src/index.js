@@ -1,4 +1,8 @@
 import './style.css';
+import CreateTodo from './modules/Todo.js'
+
+const todo1 = CreateTodo("Buy groceries", "Milk, eggs, bread")
+console.log(todo1)
 
 const tabs = document.querySelectorAll('.nav-btn');
 const content = document.getElementById('content');

@@ -37,8 +37,13 @@ The application emphasizes separation of concerns by dividing logic, DOM manipul
 ## Project Structure
 
 ```
-project-name/
-├── index.html
+src/
+├── index.js        
 ├── style.css
-└── script.js
+├── modules/
+│   ├── todo.js
+│   ├── project.js
+│   ├── appController.js
+│   ├── storage.js
+│   └── domController.js
 ```
