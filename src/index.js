@@ -1,19 +1,29 @@
 import './style.css';
 import createTodo from './modules/Todo.js'
+import createProject from './modules/Project.js'
 
-const todo1 = createTodo({
+
+
+const project = createProject("Inbox")
+
+const task1 = createTodo({
   title: "Buy milk",
-  description: "From the store",
+  description: "Store",
   dueDate: "2024-01-01",
   priority: "high"
 })
-console.log(todo1)
-
-const todo2 = createTodo({
-  title: "Buy car",
-
+const task2= createTodo({
+  title: "Buy chocolate",
+  description: "Store",
+  dueDate: "2024-01-02",
+  priority: "low"
 })
-console.log(todo2)
+project.addTask(task1)
+console.log(project.tasks)
+project.addTask(task2)
+console.log(project.tasks)
+
+
 
 const tabs = document.querySelectorAll('.nav-btn');
 const content = document.getElementById('content');
