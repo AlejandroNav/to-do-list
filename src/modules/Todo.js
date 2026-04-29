@@ -12,6 +12,7 @@ const createTodo = ({
         dueDate,
         priority,
         notes,
+        
         checklist,
         completed: false,
         id: Date.now().toString() + Math.floor(Math.random() * 1000).toString(),
