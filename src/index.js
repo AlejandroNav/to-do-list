@@ -1,27 +1,21 @@
 import './style.css';
 import createTodo from './modules/Todo.js'
+import createProjectManager from './modules/ProjectManager.js'
 import createProject from './modules/Project.js'
 
+const manager = createProjectManager()
 
+const home = createProject({ name: 'Home' })
+const work = createProject({ name: 'Work' })
 
-const project = createProject("Inbox")
+manager.addProject(home)
+manager.addProject(work)
 
-const task1 = createTodo({
-  title: "Buy milk",
-  description: "Store",
-  dueDate: "2024-01-01",
-  priority: "high"
-})
-const task2= createTodo({
-  title: "Buy chocolate",
-  description: "Store",
-  dueDate: "2024-01-02",
-  priority: "low"
-})
-project.addTask(task1)
-console.log(project.tasks)
-project.addTask(task2)
-console.log(project.tasks)
+manager.setActiveProject(home.id)
+console.log(manager.getActiveProject()) // should show Home
+
+manager.setActiveProject(work.id)
+console.log(manager.getActiveProject()) // should show Work
 
 
 
