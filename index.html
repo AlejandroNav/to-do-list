@@ -23,7 +23,30 @@
 
         <div id="modal" class="hidden">
             <div id="modal-content">
-                <!-- form will go here -->
+                <h2>Edit Task</h2>
+                <label>Title
+                    <input type="text" id="modal-title" />
+                </label>
+                <label>Description
+                    <textarea id="modal-description"></textarea>
+                </label>
+                <label>Due Date
+                    <input type="date" id="modal-due-date" />
+                </label>
+                <label>Priority
+                    <select id="modal-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </label>
+                <label>Notes
+                    <textarea id="modal-notes"></textarea>
+                </label>
+                <div id="modal-actions">
+                    <button id="modal-save">Save</button>
+                    <button id="modal-cancel">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
