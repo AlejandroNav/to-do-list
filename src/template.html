@@ -4,18 +4,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TITLE</title>
+    <title>Todo App</title>
 </head>
 
 <body>
-    <header>
-        <h1 class="logo">Project Template</h1>
-        <nav>
-            <button class="nav-btn active" data-tab="home">Home</button>
-            <button class="nav-btn" data-tab="about">About</button>
-        </nav>
-    </header>
-    <div id="content"></div>
+    <div id="app">
+        <aside id="sidebar">
+            <h2>Projects</h2>
+            <ul id="project-list"></ul>
+            <button id="add-project-btn">+ New Project</button>
+        </aside>
+
+        <main id="main">
+            <h2 id="active-project-title">Select a project</h2>
+            <ul id="task-list"></ul>
+            <button id="add-task-btn">+ Add Task</button>
+        </main>
+
+        <div id="modal" class="hidden">
+            <div id="modal-content">
+                <!-- form will go here -->
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

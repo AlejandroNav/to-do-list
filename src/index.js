@@ -1,59 +1,32 @@
-import './style.css';
-import createTodo from './modules/Todo.js'
 import createProjectManager from './modules/ProjectManager.js'
 import createProject from './modules/Project.js'
+import createTodo from './modules/Todo.js'
+import { renderApp } from './modules/render.js'
+import { setupEvents } from './modules/events.js'
+import './style.css'
 
 const manager = createProjectManager()
 
+// projects
 const home = createProject({ name: 'Home' })
 const work = createProject({ name: 'Work' })
-
+const school = createProject({ name: 'School' })
 manager.addProject(home)
 manager.addProject(work)
-
-manager.setActiveProject(home.id)
-console.log(manager.getActiveProject()) // should show Home
-
+manager.addProject(school)
 manager.setActiveProject(work.id)
-console.log(manager.getActiveProject()) // should show Work
 
+// home tasks
+home.addTask(createTodo({ title: 'Buy chicken', priority: 'high', dueDate: '2024-06-01' }))
+home.addTask(createTodo({ title: 'Clean house', priority: 'low', dueDate: '2024-06-03' }))
+home.addTask(createTodo({ title: 'Pay bills', priority: 'medium', dueDate: '2024-06-05' }))
 
+// work tasks
+work.addTask(createTodo({ title: 'Send report', priority: 'high', dueDate: '2024-06-02' }))
+work.addTask(createTodo({ title: 'Team meeting', priority: 'medium' }))
 
-const tabs = document.querySelectorAll('.nav-btn');
-const content = document.getElementById('content');
+// school tasks
+school.addTask(createTodo({ title: 'Math homework', priority: 'high' }))
 
-const pages = {
-    home: () => {
-        content.innerHTML = `
-      <div class="hero">
-        <h2>Hello World</h2>
-        <p>This is a neo-brutalist SPA template.</p>
-        <button class="btn" id="alert-btn">Click me</button>
-      </div>
-    `;
-        document.getElementById('alert-btn').addEventListener('click', () => {
-            alert('It works!');
-        });
-    },
-    about: () => {
-        content.innerHTML = `
-      <div class="hero">
-        <h2>About</h2>
-        <p>Built with Webpack, HTML, CSS and vanilla JS.</p>
-      </div>
-    `;
-    },
-};
-
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        content.style.animation = 'none';
-        content.offsetHeight;
-        content.style.animation = '';
-        pages[tab.dataset.tab]();
-    });
-});
-
-pages.home();
+renderApp(manager)
+setupEvents(manager)

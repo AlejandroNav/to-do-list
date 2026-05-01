@@ -5,6 +5,8 @@ const createTodo = ({
     priority = 'medium',
     notes = '',
     checklist = [],
+    completed = false,
+    id = Date.now().toString() + Math.floor(Math.random() * 1000).toString(),
 }) => {
     return {
         title,
@@ -13,28 +15,18 @@ const createTodo = ({
         priority,
         notes,
         checklist,
-        completed: false,
-        id: Date.now().toString() + Math.floor(Math.random() * 1000).toString(),
+        completed,
+        id,
 
         toggleComplete() {
-            this.completed = !this.completed;
+            this.completed = !this.completed
         },
 
         updateField(field, value) {
-            const allowedFields = [
-                'title',
-                'description',
-                'dueDate',
-                'priority',
-                'notes',
-                'checklist',
-            ]
-
+            const allowedFields = ['title', 'description', 'dueDate', 'priority', 'notes', 'checklist']
             if (!allowedFields.includes(field)) return
-
             this[field] = value
         },
     }
 }
-
-export default createTodo;
+export default createTodo
