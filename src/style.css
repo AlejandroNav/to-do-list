@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap');
+
+/* ============ RESET ============ */
 *,
 *::before,
 *::after {
@@ -7,19 +9,23 @@
     padding: 0;
 }
 
+/* ============ VARIABLES ============ */
 :root {
     --black: #000000;
     --bg: #518d4c;
     --accent: #a6e97c;
+    --accent-dark: #283d1d;
 }
 
-body { 
-    font-family:  'Space Grotesk', system-ui, sans-serif;
+/* ============ BASE ============ */
+body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     background: var(--bg);
     min-height: 100vh;
 }
 
-#app { 
+/* ============ LAYOUT ============ */
+#app {
     display: flex;
     min-height: 100vh;
 }
@@ -40,6 +46,7 @@ body {
     padding: 3rem;
 }
 
+/* ============ LISTS ============ */
 #project-list,
 #task-list {
     list-style: none;
@@ -47,29 +54,41 @@ body {
     flex-direction: column;
     gap: 8px;
     padding: 1rem 0;
-    
-
 }
 
+/* ============ SIDEBAR BUTTONS ============ */
 #project-list button {
     width: 100%;
     padding: 8px;
-    background: #333;
+    background: #000000;
     color: white;
-    border: 2px solid white;
+    border: 2px solid rgb(255, 255, 255);
     cursor: pointer;
     text-align: left;
-    box-shadow: 3px 3px 0 white;
+    padding: .6rem 1rem;
+    margin-bottom: .3rem;
 }
 
 #project-list button.active {
-    background: var(--accent);
-    color: var(--black);
+    background-color: #5daa2d;
+    color: #000;
+    box-shadow: 4px 3px 0 rgb(255, 255, 255);
 }
 
+#add-project-btn {
+    padding: 0.4rem 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 3px 3px 0 white;
+    color: white;
+    background: transparent;
+}
+
+/* ============ TASK LIST ============ */
 #task-list li {
-    background: #f0f0f0;
-    padding: 10px;
+    background: #d0f1aa;
+    padding: 10px 15px;
     border: 2px solid var(--black);
     box-shadow: 3px 3px 0 var(--black);
 }
@@ -78,17 +97,48 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 300;
 }
 
+#task-list button.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+    background-color: #8fc970;
+}
+
+#add-task-btn {
+    padding: 0.4rem 1.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: 2px solid var(--black);
+    box-shadow: 3px 3px 0 var(--black);
+    background: var(--accent);
+}
+
+/* ============ PRIORITY COLORS ============ */
+#task-list li[data-priority="high"] {
+    border-left: 8px solid rgb(255, 97, 97);
+}
+
+#task-list li[data-priority="medium"] {
+    border-left: 8px solid rgb(187, 38, 38);
+}
+
+#task-list li[data-priority="low"] {
+    border-left: 8px solid rgb(79, 23, 23);
+    border-top: px solid rgb(79, 23, 23);
+}
+
+/* ============ TASK DETAILS ============ */
 .task-details {
     padding: 10px;
-    background: #8ac15d;
     display: flex;
     flex-direction: column;
     gap: 6px;
     margin-top: 8px;
+    border-top: 4px solid var(--black);
 }
 
 .task-details button {
@@ -96,23 +146,164 @@ body {
     padding: 4px 10px;
     cursor: pointer;
     border: 2px solid var(--black);
-    box-shadow: 2px 2px 0 var(--black);
+    box-shadow: 3px 3px 0 var(--black);
+    background: white;
+}
+
+.task-details .btn-group {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.btn-group .complete-btn {
+    background: #21693f !important;
+    color: white;
+}
+
+.btn-group .edit-btn {
+    background: #a5711e !important;
+    color: white;
+}
+
+.btn-group .delete-btn {
+    background: #a81f10 !important;
+    color: white;
+}
+
+/* ============ MODAL ============ */
+#modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal.hidden {
+    display: none;
+}
+
+#modal-content {
+    background: rgb(155, 231, 132);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 400px;
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+#modal-content label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     font-weight: 700;
 }
 
-#add-project-btn,
-#add-task-btn {
-    padding: 0.4rem 1.2rem;
+#modal-content input,
+#modal-content textarea,
+#modal-content select {
+    padding: 6px;
+    border: 2px solid var(--black);
+    font-family: inherit;
+}
+
+#modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+#modal-actions button {
+    padding: 8px 20px;
     font-weight: 700;
     cursor: pointer;
+    background-color: #65ba6e;
     border: 2px solid var(--black);
     box-shadow: 3px 3px 0 var(--black);
-    background: var(--accent);
 }
 
-#add-project-btn {
-    border-color: white;
-    box-shadow: 3px 3px 0 white;
-    color: white;
-    background: transparent;
+/* ============ ANIMATIONS ============ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#task-list li {
+    animation: fadeIn 0.2s ease forwards;
+}
+
+#project-list li {
+    animation: fadeIn 0.15s ease forwards;
+}
+
+.task-details {
+    animation: slideIn 0.2s ease forwards;
+}
+
+#modal-content {
+    animation: slideIn 0.2s ease forwards;
+}
+
+/* ============ HOVER EFFECTS ============ */
+#project-list button:hover {
+    background: #202020;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 white;
+}
+
+#task-list li:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+#add-project-btn:hover,
+#add-task-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+#add-project-btn:hover {
+    box-shadow: 5px 5px 0 white;
+}
+
+.task-details button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+#modal-actions button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+/* ============ TRANSITIONS ============ */
+#project-list button,
+#task-list li,
+#add-project-btn,
+#add-task-btn,
+.task-details button,
+#modal-actions button {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }

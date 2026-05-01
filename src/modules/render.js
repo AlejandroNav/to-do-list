@@ -22,8 +22,16 @@ const renderProjects = (projects, activeProjectId) => {
 const renderTasks = (tasks) => {
     const taskList = document.querySelector('#task-list')
     taskList.innerHTML = ''
+    if (tasks.length === 0) {
+        const empty = document.createElement('p')
+        empty.textContent = 'No tasks yet — add one!'
+        empty.style.opacity = '0.6'
+        taskList.appendChild(empty)
+        return
+    }
     tasks.forEach(task => {
         const taskItem = document.createElement('li')
+        taskItem.dataset.priority = task.priority
         taskItem.dataset.taskId = task.id
         const taskButton = document.createElement('button')
         taskButton.textContent = task.title
