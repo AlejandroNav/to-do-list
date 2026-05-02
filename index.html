@@ -16,6 +16,9 @@
         </aside>
 
         <main id="main">
+            <header id="top-bar">
+                <h1>Tasky</h1>
+            </header>
             <h2 id="active-project-title">Select a project</h2>
             <ul id="task-list"></ul>
             <button id="add-task-btn">+ Add Task</button>
@@ -46,6 +49,18 @@
                 <div id="modal-actions">
                     <button id="modal-save">Save</button>
                     <button id="modal-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="project-modal" class="hidden">
+            <div id="project-modal-content">
+                <h2>New Project</h2>
+                <label>Name
+                    <input type="text" id="project-modal-name" placeholder="Project name..." />
+                </label>
+                <div id="modal-actions">
+                    <button id="project-modal-save">Save</button>
+                    <button id="project-modal-cancel">Cancel</button>
                 </div>
             </div>
         </div>
