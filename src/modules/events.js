@@ -5,13 +5,14 @@ import { saveProjects } from './Storage.js'
 
 let currentTaskId = null
 
-const openModal = (task) => {
-    currentTaskId = task.id
-    document.querySelector('#modal-title').value = task.title
-    document.querySelector('#modal-description').value = task.description || ''
-    document.querySelector('#modal-due-date').value = task.dueDate || ''
-    document.querySelector('#modal-priority').value = task.priority
-    document.querySelector('#modal-notes').value = task.notes || ''
+const openModal = (task = null) => {
+    currentTaskId = task ? task.id : null
+    document.querySelector('#modal-title').value = task ? task.title : ''
+    document.querySelector('#modal-description').value = task ? task.description : ''
+    document.querySelector('#modal-due-date').value = task ? task.dueDate || '' : ''
+    document.querySelector('#modal-priority').value = task ? task.priority : 'medium'
+    document.querySelector('#modal-notes').value = task ? task.notes : ''
+    document.querySelector('#modal h2').textContent = task ? 'Edit Task' : 'New Task'
     document.querySelector('#modal').classList.remove('hidden')
 }
 
@@ -31,16 +32,34 @@ const setupProjectEvents = (manager) => {
     })
 }
 
+const openProjectModal = () => {
+    document.querySelector('#project-modal-name').value = ''
+    document.querySelector('#project-modal').classList.remove('hidden')
+}
+
+const closeProjectModal = () => {
+    document.querySelector('#project-modal').classList.add('hidden')
+}
+
 const setupAddProjectEvent = (manager) => {
     const addBtn = document.querySelector('#add-project-btn')
-    addBtn.addEventListener('click', () => {
-        const name = prompt('Project name:')
+    addBtn.addEventListener('click', () => openProjectModal())
+
+    document.querySelector('#project-modal-cancel').addEventListener('click', closeProjectModal)
+
+    document.querySelector('#project-modal').addEventListener('click', (event) => {
+        if (event.target === document.querySelector('#project-modal')) closeProjectModal()
+    })
+
+    document.querySelector('#project-modal-save').addEventListener('click', () => {
+        const name = document.querySelector('#project-modal-name').value
         if (!name) return
         const project = createProject({ name })
         manager.addProject(project)
         manager.setActiveProject(project.id)
         saveProjects(manager.getProjects())
         renderApp(manager)
+        closeProjectModal()
     })
 }
 
@@ -49,15 +68,9 @@ const setupAddTaskEvent = (manager) => {
     addBtn.addEventListener('click', () => {
         const activeProject = manager.getActiveProject()
         if (!activeProject) return
-        const title = prompt('Task title:')
-        if (!title) return
-        const task = createTodo({ title })
-        activeProject.addTask(task)
-        saveProjects(manager.getProjects())
-        renderApp(manager)
+        openModal()
     })
 }
-
 const setupTaskEvents = (manager) => {
     const taskList = document.querySelector('#task-list')
     taskList.addEventListener('click', (event) => {
@@ -118,16 +131,31 @@ const setupModalEvents = (manager) => {
     document.querySelector('#modal').addEventListener('click', (event) => {
         if (event.target === document.querySelector('#modal')) closeModal()
     })
+
     document.querySelector('#modal-save').addEventListener('click', () => {
         const activeProject = manager.getActiveProject()
-        const task = activeProject.tasks.find(t => t.id === currentTaskId)
-        if (!task) return
+        if (!activeProject) return
 
-        task.updateField('title', document.querySelector('#modal-title').value)
-        task.updateField('description', document.querySelector('#modal-description').value)
-        task.updateField('dueDate', document.querySelector('#modal-due-date').value)
-        task.updateField('priority', document.querySelector('#modal-priority').value)
-        task.updateField('notes', document.querySelector('#modal-notes').value)
+        if (currentTaskId) {
+            // edit mode
+            const task = activeProject.tasks.find(t => t.id === currentTaskId)
+            if (!task) return
+            task.updateField('title', document.querySelector('#modal-title').value)
+            task.updateField('description', document.querySelector('#modal-description').value)
+            task.updateField('dueDate', document.querySelector('#modal-due-date').value)
+            task.updateField('priority', document.querySelector('#modal-priority').value)
+            task.updateField('notes', document.querySelector('#modal-notes').value)
+        } else {
+            // create mode
+            const task = createTodo({
+                title: document.querySelector('#modal-title').value || 'Untitled',
+                description: document.querySelector('#modal-description').value,
+                dueDate: document.querySelector('#modal-due-date').value,
+                priority: document.querySelector('#modal-priority').value,
+                notes: document.querySelector('#modal-notes').value,
+            })
+            activeProject.addTask(task)
+        }
 
         saveProjects(manager.getProjects())
         renderApp(manager)

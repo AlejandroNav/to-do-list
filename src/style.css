@@ -15,6 +15,7 @@
     --bg: #518d4c;
     --accent: #a6e97c;
     --accent-dark: #283d1d;
+    --modal-bg: rgb(155, 231, 132);
 }
 
 /* ============ BASE ============ */
@@ -22,6 +23,21 @@ body {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     background: var(--bg);
     min-height: 100vh;
+}
+
+/* ============ HEADER ============ */
+#top-bar {
+    background: var(--black);
+    color: var(--accent);
+    padding: 1rem 6rem;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 1rem;
+}
+
+#top-bar h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
 /* ============ LAYOUT ============ */
@@ -56,23 +72,22 @@ body {
     padding: 1rem 0;
 }
 
-/* ============ SIDEBAR BUTTONS ============ */
+/* ============ SIDEBAR ============ */
 #project-list button {
     width: 100%;
-    padding: 8px;
-    background: #000000;
+    padding: 0.6rem 1rem;
+    background: var(--black);
     color: white;
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid white;
     cursor: pointer;
     text-align: left;
-    padding: .6rem 1rem;
-    margin-bottom: .3rem;
+    margin-bottom: 0.3rem;
 }
 
 #project-list button.active {
-    background-color: #5daa2d;
-    color: #000;
-    box-shadow: 4px 3px 0 rgb(255, 255, 255);
+    background: #5daa2d;
+    color: var(--black);
+    box-shadow: 4px 3px 0 white;
 }
 
 #add-project-btn {
@@ -128,7 +143,6 @@ body {
 
 #task-list li[data-priority="low"] {
     border-left: 8px solid rgb(79, 23, 23);
-    border-top: px solid rgb(79, 23, 23);
 }
 
 /* ============ TASK DETAILS ============ */
@@ -171,8 +185,9 @@ body {
     color: white;
 }
 
-/* ============ MODAL ============ */
-#modal {
+/* ============ MODALS — SHARED ============ */
+#modal,
+#project-modal {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
@@ -181,22 +196,33 @@ body {
     justify-content: center;
 }
 
-#modal.hidden {
+#modal.hidden,
+#project-modal.hidden {
     display: none;
 }
 
-#modal-content {
-    background: rgb(155, 231, 132);
+#modal-content,
+#project-modal-content {
+    background: var(--modal-bg);
     padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    min-width: 400px;
     border: 3px solid var(--black);
     box-shadow: 6px 6px 0 var(--black);
+    animation: slideIn 0.2s ease forwards;
 }
 
-#modal-content label {
+#modal-content {
+    min-width: 400px;
+}
+
+#project-modal-content {
+    min-width: 300px;
+}
+
+#modal-content label,
+#project-modal-content label {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -205,7 +231,8 @@ body {
 
 #modal-content input,
 #modal-content textarea,
-#modal-content select {
+#modal-content select,
+#project-modal-content input {
     padding: 6px;
     border: 2px solid var(--black);
     font-family: inherit;
@@ -216,11 +243,12 @@ body {
     gap: 10px;
 }
 
-#modal-actions button {
+#modal-actions button,
+#project-modal-content button {
     padding: 8px 20px;
     font-weight: 700;
     cursor: pointer;
-    background-color: #65ba6e;
+    background: #65ba6e;
     border: 2px solid var(--black);
     box-shadow: 3px 3px 0 var(--black);
 }
@@ -262,10 +290,6 @@ body {
     animation: slideIn 0.2s ease forwards;
 }
 
-#modal-content {
-    animation: slideIn 0.2s ease forwards;
-}
-
 /* ============ HOVER EFFECTS ============ */
 #project-list button:hover {
     background: #202020;
@@ -278,22 +302,19 @@ body {
     box-shadow: 5px 5px 0 var(--black);
 }
 
-#add-project-btn:hover,
+#add-project-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 white;
+}
+
 #add-task-btn:hover {
     transform: translate(-2px, -2px);
     box-shadow: 5px 5px 0 var(--black);
 }
 
-#add-project-btn:hover {
-    box-shadow: 5px 5px 0 white;
-}
-
-.task-details button:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0 var(--black);
-}
-
-#modal-actions button:hover {
+.task-details button:hover,
+#modal-actions button:hover,
+#project-modal-content button:hover {
     transform: translate(-2px, -2px);
     box-shadow: 5px 5px 0 var(--black);
 }
@@ -304,6 +325,7 @@ body {
 #add-project-btn,
 #add-task-btn,
 .task-details button,
-#modal-actions button {
+#modal-actions button,
+#project-modal-content button {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
