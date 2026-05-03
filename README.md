@@ -58,13 +58,22 @@ rehydration of objects with their methods intact.
 
 ## Project Structure
 src/
-├── index.js          — app entry point, boots from localStorage
-├── style.css         — all styles
-├── template.html     — base HTML template
+├── index.js          
+
+├── style.css       
+
+├── template.html     
+
 └── modules/
-├── Todo.js           — task factory function
-├── Project.js        — project factory function
-├── ProjectManager.js — manages all projects and active state
-├── Storage.js        — localStorage save/load with rehydration
-├── render.js         — DOM rendering functions
-└── events.js         — all user interaction and event handlers
+├── Todo.js           
+
+├── Project.js       
+
+├── ProjectManager.js 
+
+├── Storage.js      
+
+├── render.js     
+
+└── events.js      
+
