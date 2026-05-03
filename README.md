@@ -13,10 +13,7 @@ Built as part of [The Odin Project](https://www.theodinproject.com).
 
 Tasky is a dynamic todo list application focused on clean architecture and separation of concerns.
 Users can create projects, add tasks with details like due dates, priorities, notes and descriptions,
-and manage them through an interactive interface.
-
-Data is persisted using localStorage so everything is saved between sessions — including full
-rehydration of objects with their methods intact.
+and manage them. Data is persisted using localStorage so everything is saved between sessions.
 
 ---
 
@@ -29,8 +26,7 @@ rehydration of objects with their methods intact.
 - Priority indicators (high / medium / low) with color coding
 - Completed task styling with strikethrough
 - Data persistence via localStorage with full object rehydration
-- Default projects and tasks on first load
-- Animated UI with hover effects
+
 
 ---
 
