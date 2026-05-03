@@ -2,7 +2,7 @@
 
 A modular todo list application that lets users organize tasks into projects and manage their daily workflow.
 Built as part of [The Odin Project](https://www.theodinproject.com).
-
+![App Screenshot]([https://raw.githubusercontent.com/yourusername/your-repo-name/main/screenshots/app.png](https://github.com/AlejandroNav/to-do-list/blob/main/screenshots/app.png?raw=true))
 **Live Demo:** [View App](https://alejandronav.github.io/to-do-list/)
 
 ---
